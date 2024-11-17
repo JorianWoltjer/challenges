@@ -1,0 +1,4 @@
+Hi there, welcome to the challenge! I hope you have fun and learn something new.
+Good to know: the messages inside of this file will be *different on remote*.
+Where's the fun in already knowing what Alice and Bob said?
+Well, I won't hold you here any longer, go on and solve the challenge!

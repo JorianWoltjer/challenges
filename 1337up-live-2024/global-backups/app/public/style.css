@@ -1,0 +1,465 @@
+html,
+body,
+main {
+  height: 100%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  color: white;
+  background: black;
+  font-family: Segoe UI;
+  font-weight: lighter;
+  overflow: hidden;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("/windows10-bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  filter: brightness(0.8);
+}
+
+main {
+  transform: translateY(0);
+  transition: transform 0.6s ease-out;
+}
+main.open {
+  transform: translateY(-100%);
+}
+body:has(main.zoom)::before {
+  transform: scale(1.03);
+  filter: brightness(0.5);
+}
+
+.info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  margin: 2em 2em;
+}
+.welcome {
+  position: absolute;
+  top: 10%;
+  text-align: center;
+  width: 100%;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  animation: show 0.6s ease-out;
+}
+
+.icons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1em;
+}
+
+.notifications {
+  position: absolute;
+  bottom: 3em;
+  right: 0;
+  z-index: 1;
+}
+.notifications p {
+  margin: 0;
+  color: rgb(159, 159, 159);
+}
+.notification {
+  position: relative;
+  margin: 1em;
+  padding: 0.5em 0.8em;
+  width: 20em;
+  background: rgba(30, 30, 30, 0.8);
+}
+.notification .x {
+  position: absolute;
+  top: 0;
+  right: 0.4em;
+  padding: 0.2em;
+  font-size: large;
+  color: rgb(159, 159, 159);
+  cursor: pointer;
+  transition: 0.1s ease-out;
+}
+.notification .x:hover {
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: lighter;
+  margin: 0;
+}
+h1 {
+  font-size: 9em;
+  line-height: 1;
+}
+h2 {
+  font-size: 3.5em;
+}
+h3 {
+  font-size: 2.5em;
+}
+h4 {
+  font-size: inherit;
+  font-weight: 500;
+}
+
+form {
+  margin-top: 2em;
+}
+
+.login input {
+  display: block;
+  width: 20em;
+  padding: 0.35em 0.5em;
+  margin: 0.5em;
+  font-size: 1em;
+  font-family: inherit;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  outline: none !important;
+}
+
+.login .password-input {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  width: max-content;
+  margin: 0.5em;
+  display: table;
+}
+
+.login input:hover,
+.login .password-input input:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login input:hover,
+.login .password-input:has(:hover) {
+  border-color: white;
+}
+
+.login input:focus,
+.login .password-input input:focus {
+  background-color: white;
+  color: black;
+}
+
+.login .password-input:has(:focus) {
+  border-color: white;
+}
+
+.login .password-input input {
+  display: inline;
+  width: 18em;
+  margin: 0;
+  border: none !important;
+  outline: none !important;
+}
+
+.login .password-input .button {
+  background: rgba(200, 200, 200, 0.3);
+  display: table-cell;
+  width: 2em;
+}
+
+.login .password-input button {
+  padding: 1em;
+  margin: -1em;
+  border: none;
+  outline: none !important;
+  background: none;
+  transform: translateY(0.3em);
+  cursor: default;
+}
+.login .password-input .button:hover,
+.login .password-input .button:has(:focus) {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.login .password-input .button:has(:active) {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+svg#back-arrow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1em;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.1s ease-out;
+}
+svg#back-arrow:hover {
+  opacity: 1;
+}
+
+.file-explorer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  font-weight: normal;
+  font-size: 0.8em;
+  letter-spacing: 0.5px;
+  background: white;
+  color: black;
+  border: lightblue 1px solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-bar {
+  display: flex;
+  flex-direction: row;
+}
+.title-bar img {
+  padding: 0.4em;
+}
+.title-bar hr {
+  color: rgb(220, 220, 220);
+}
+.title-bar span {
+  padding: 0.4em;
+  flex-grow: 1;
+}
+.window-buttons {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.window-buttons svg {
+  padding: 0.5em 1.2em;
+}
+.window-buttons svg:hover {
+  background: #e5e5e5;
+}
+.window-buttons svg.x:hover {
+  background: #d14646;
+  outline: 1px solid #d14646;
+}
+.window-buttons svg.x:hover * {
+  stroke: white;
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  border-bottom: rgb(220, 220, 220) 1px solid;
+}
+.toolbar span {
+  padding: 0.3em 1.3em;
+  text-align: center;
+}
+.toolbar span.selected {
+  background: #1979ca;
+  color: white;
+}
+.toolbar span:hover {
+  cursor: default;
+}
+.toolbar span:not(.selected):hover {
+  background: #efefef;
+}
+.toolbar span.selected:hover {
+  background: #1567ad;
+}
+
+.address-bar {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5em;
+  gap: 0.5em;
+}
+a:has(svg) {
+  text-decoration: none !important;
+}
+.address-bar .buttons svg {
+  padding: 0.2em;
+  margin: 0.1em;
+}
+.address-bar .buttons svg.disabled {
+  cursor: default !important;
+  opacity: 0.3;
+}
+.address-bar .buttons svg:hover {
+  cursor: pointer;
+  background: #e9f0f9;
+  outline: 1px solid #99bddb;
+}
+
+.path {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
+  border: rgb(220, 220, 220) 1px solid;
+}
+.path img {
+  padding: 0.4em;
+}
+.path svg {
+  transform: translateY(0.1em);
+}
+.path span {
+  align-content: center;
+  padding: 0 0.4em;
+  height: 100%;
+}
+.path span:hover {
+  cursor: default;
+  background: #e9f0f9;
+  outline: 1px solid #99bddb;
+}
+
+.files {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex-grow: 1;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  color: #54738f;
+  font-weight: normal;
+  text-align: left;
+  border-right: rgb(220, 220, 220) 1px solid;
+  margin-bottom: 0.5em;
+  height: 1.5em;
+}
+tbody::before {
+  content: "\200C";
+  display: block;
+  height: 0.5em;
+}
+.filename {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3em;
+}
+.filename img {
+  filter: drop-shadow(0.1px 0.1px black);
+}
+td img,
+td svg {
+  padding-left: 0.1em;
+  padding-top: 0.2em;
+}
+td,
+th {
+  padding-left: 0.5em;
+}
+td:not(.filename) {
+  color: rgb(100, 100, 100);
+}
+.file-explorer a {
+  color: black;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 40vw;
+}
+.file-explorer a:hover {
+  text-decoration: underline;
+}
+
+.file-explorer tbody tr[tabindex]:hover {
+  background: #e6f4f5;
+}
+.file-explorer tbody tr:focus {
+  background: #cbe8fe !important;
+  outline: 1px solid #99bddb;
+}
+
+.bottom-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-top: rgb(220, 220, 220) 1px solid;
+}
+.bottom-bar span {
+  color: #031323;
+  padding: 0.3em 1.3em;
+}
+.bottom-bar form,
+td form {
+  margin: 0;
+}
+button.windows-button,
+input::file-selector-button {
+  margin: 0.3em;
+  margin-top: 0.5em;
+  padding: 0.3em 1.3em;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em;
+  outline: none;
+  border: 1px solid rgb(150, 150, 150);
+  background: rgb(220, 220, 220);
+  transition: 0.2s ease-out;
+}
+input[type="file"] {
+  outline: none !important;
+}
+button.windows-button:focus,
+input:focus::file-selector-button {
+  border-color: #1979ca;
+  outline: 1px solid #1979ca;
+}
+button.windows-button:hover,
+input::file-selector-button:hover {
+  background: #dde7f4;
+  border: 1px solid #1979ca;
+}
+button img {
+  width: 3ch;
+  filter: drop-shadow(0.1px 0.1px black);
+}
+
+.delete-icon {
+  cursor: pointer;
+  background: none;
+  border: none;
+  fill: #646464;
+}
+.delete-icon:hover {
+  fill: #d14646;
+}

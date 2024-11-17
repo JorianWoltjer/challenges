@@ -1,0 +1,171 @@
+<%- include('header') %>
+
+<main class="zoom">
+  <div class="file-explorer">
+    <div class="title-bar">
+      <img src="/explorer.ico" width="18" />
+      <hr />
+      <span>File Explorer</span>
+      <div class="window-buttons">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+          <line x1="6" y1="12" x2="18" y2="12" stroke="black" stroke-width="1" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+          <rect x="6" y="6" width="12" height="12" stroke="black" fill="none" stroke-width="1" />
+        </svg>
+        <svg class="x" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+          <line x1="6" y1="6" x2="18" y2="18" stroke="black" stroke-width="1" />
+          <line x1="6" y1="18" x2="18" y2="6" stroke="black" stroke-width="1" />
+        </svg>
+      </div>
+    </div>
+    <div class="toolbar">
+      <span class="selected">File</span>
+      <span>Home</span>
+      <span>Share</span>
+      <span>View</span>
+    </div>
+    <div class="address-bar">
+      <div class="buttons">
+        <a href="/logout">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12H4M11 5l-8 7 8 7" stroke="gray" stroke-width="3" fill="none" />
+          </svg>
+        </a>
+        <svg class="disabled" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12h17M13 5l8 7-8 7" stroke="gray" stroke-width="3" fill="none" />
+        </svg>
+        <svg class="disabled" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 7 L10 14 L17 14" stroke="gray" stroke-width="3" fill="none" transform="rotate(-45 12 12)" />
+        </svg>
+        <svg class="disabled" width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 19V4M5 11l7-7 7 7" stroke="gray" stroke-width="3" fill="none" />
+        </svg>
+      </div>
+      <div class="path">
+        <img src="/folder.ico" width="16" />
+        <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 7 L15 12 L10 17" stroke="gray" stroke-width="3" fill="none" />
+        </svg>
+        <span>This PC</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 7 L15 12 L10 17" stroke="gray" stroke-width="3" fill="none" />
+        </svg>
+        <span>Desktop</span>
+      </div>
+    </div>
+    <div class="files">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Date accessed</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% files.forEach((file, i) => { %>
+          <tr tabindex="<%= i %>">
+            <td class="filename">
+              <img src="/document.png" width="20" />
+              <a href="/file/<%= file.name %>"><%= file.name %></a>
+            </td>
+            <td><%= file.size %></td>
+            <td><%= file.accessed %></td>
+            <td>
+              <form action="/delete/<%= file.name %>" method="post">
+                <button class="delete-icon" type="submit" title="Delete" onclick="this.disabled = true; this.form.submit();">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 32 32">
+                    <path
+                      d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z"
+                    ></path>
+                  </svg>
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% }); %>
+          <tr>
+            <td>
+              <form action="/upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" />
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bottom-bar">
+      <span><%= files.length %> items</span>
+      <form action="/backup" method="post">
+        <button class="windows-button" type="submit">
+          <img src="/cloud.ico" />
+          Backup
+        </button>
+      </form>
+
+      <form action="/restore" method="post">
+        <button class="windows-button" type="submit">
+          <img src="restore.ico" />
+          Restore
+        </button>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.querySelector('input[type="file"]').addEventListener("change", function () {
+    this.form.submit();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowUp") {
+      const selected = document.querySelector("tr:focus");
+      if (selected) {
+        selected.previousElementSibling?.focus();
+      }
+    } else if (e.key === "ArrowDown") {
+      const selected = document.querySelector("tr:focus");
+      if (selected) {
+        selected.nextElementSibling?.focus();
+      }
+    } else if (e.key === "Delete") {
+      const selected = document.querySelector("tr:focus");
+      if (selected) {
+        selected.querySelector("button.delete-icon").click();
+      }
+    } else if (e.key === "Enter") {
+      const selected = document.querySelector("tr:focus");
+      if (selected) {
+        selected.querySelector("a").click();
+      }
+    }
+  });
+
+  const files = document.querySelector(".files");
+  files.addEventListener("drop", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const fetches = Array.from(e.dataTransfer.files).map((file) => {
+      const formData = new FormData();
+      formData.append("file", file);
+      return fetch("/upload", {
+        method: "POST",
+        redirect: "manual",
+        body: formData,
+      });
+    });
+    Promise.all(fetches).then(() => {
+      console.log("done");
+      location.reload();
+    });
+  });
+  files.addEventListener("dragover", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+  });
+</script>
+
+<%- include('footer') %>

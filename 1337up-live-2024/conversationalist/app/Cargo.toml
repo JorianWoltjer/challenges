@@ -1,0 +1,9 @@
+[package]
+name = "conversationalist"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cocoon = "0.3"
+hex = "0.4.3"
+rand = "0.8.5"
