@@ -405,7 +405,7 @@ In this case, it finds two possible `H` values. To test which it is, and compute
 
 This is the first step where we need to have the `GHASH()` function implemented. Luckily, this function is pretty simple with the `F128Element`s we already have. It goes as follows:
 
-![The GHASH function processes 128-bit blocks in order](ghash.svg)
+![The GHASH function processes 128-bit blocks in order](docs/ghash.svg)
 
 We start off at 0, then XOR the first block with it. Then, multiply that by H. Now XOR the second block and multiply by H again. Continuing until we have our result:
 
